@@ -1,0 +1,33 @@
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color: rgb(230, 230, 238);">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a style="font-size: 1.2em; text-transform: uppercase;"><b>Tchat<span
+                            style="  color: #424fc5;">EVENTS</span></b></a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="" href="#" style="  color: #424fc5; text-decoration: none; font-size: 1.2em;   text-transform: uppercase;
+                        font-weight: 500;   display: inline-block; transition: all 0.2s ease-in-out; "><b>Home</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="  color: #424fc5; text-decoration: none; font-size: 1.2em;   text-transform: uppercase;
+                        font-weight: 500;   display: inline-block; transition: all 0.2s ease-in-out; "
+                            routerLink="/admin" *ngIf="userService.roleMatch(['Admin'])"><b>Dash Admin</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="  color: #424fc5; text-decoration: none; font-size: 1.2em;   text-transform: uppercase;
+                        font-weight: 500;   display: inline-block; transition: all 0.2s ease-in-out; "
+                            routerLink="/addEvent" *ngIf="userService.roleMatch(['User'])"><b>Demande d'organiser evenement</b></a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <button *ngIf="! isLoggedIn()" routerLinkActive="active" type="button" class="button-86"
+                        routerLink="/login">Login</button>
+                    <button *ngIf="isLoggedIn()" routerLinkActive="active" type="button" class="button-85"
+                        (click)="logout()" routerLink="/login">Logout</button>
+
+                </form>
+            </div>
+        </div>
+    </nav>
+</body>

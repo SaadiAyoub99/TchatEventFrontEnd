@@ -1,0 +1,94 @@
+<body>
+    <div class="container mt-5 ">
+        <mat-card-title class="title"><b> Demande d'organiser Evenement</b></mat-card-title>
+        <mat-card>
+            <div class="row" align="end">
+                <div class="col-5">
+                    <form #demandeEventForm="ngForm" (submit)="demandeEvent(demandeEventForm)">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Titre d'evenement</mat-label>
+                            <input matInput placeholder="Titre d'evenement" [(ngModel)]="dEvent.titre" name="titre"
+                                required>
+                            <mat-icon matSuffix>text_fields</mat-icon>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="Description" [(ngModel)]="dEvent.description"
+                                name="description" required>
+                            <mat-icon matSuffix>description</mat-icon>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Prix de place</mat-label>
+                            <input matInput placeholder="Prix en dirhame" [(ngModel)]="dEvent.prixPlace"
+                                name="prixPlace" required>
+                            <mat-icon matSuffix>attach_money</mat-icon>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Heure de debut de l'evenement</mat-label>
+                            <input matInput placeholder="Heure de l'evenement" [(ngModel)]="dEvent.heureDebut"
+                                name="heureDebut" required>
+                            <mat-icon matSuffix>access_time</mat-icon>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Date d'organisation</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker" required></mat-datepicker-toggle>
+                            <mat-datepicker #picker [(ngModel)]="dEvent.dateOrganisation" name="dateOrganisation">
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Selectionner la categorie de sujet</mat-label>
+                            <mat-select required [(ngModel)]="dEvent.categorie" name="categorie">
+                                <mat-option *ngFor="let c of categorie " [value]="categorie">{{ c.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-divider [inset]="true"></mat-divider>
+                        <br>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Selectionner la salle</mat-label>
+                            <mat-select required [(ngModel)]="dEvent.salle" name="salle">
+                                <mat-option *ngFor="let s of salle " [value]="salle">{{ s.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div align="centre">
+                            <section>
+                                <div class="example-button-row" style="align-content: centre ;">
+                                    <button mat-raised-button color="primary">Envoyer la demande</button>
+                                </div>
+                            </section>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="col-7" align="center">
+                    <div>
+                        <input type="file" multiple value="select" #selectFile (change)="onFileSelected($event)">
+                    </div>
+                    <div class="mt-5">
+                        <div class="row">
+                        <mat-grid-list cols="2" rowHeight="2:1">
+                            <mat-grid-tile *ngFor="let file of dEvent.image; let i = index">
+                                <div style="position: relative">
+                                    <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+                                    <img [src]="file.url" width="100px" height="100px" >
+                                </div>
+                            </mat-grid-tile>
+                          </mat-grid-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</body>
