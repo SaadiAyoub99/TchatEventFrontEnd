@@ -10,11 +10,17 @@ export class UserService {
   API = "http://localhost:8088"
   requestHeader = new HttpHeaders(
     { "No-Auth": "True" }
-  );
+  )
 
   constructor(private httpClient: HttpClient,     
     private userAuthService: UserAuthService
     ) { }
+
+
+    public getUser(id: any) {
+      console.log("this is id ="+ id)
+      return this.httpClient.get<any>(this.API+"/user/"+ id);
+    }
 
   public login(loginData: any) {
     return this.httpClient.post(this.API + "/authenticate", loginData, { headers: this.requestHeader });

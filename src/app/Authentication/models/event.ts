@@ -3,7 +3,6 @@ import { FileHandle } from "./file-handle";
 import { Salle } from "./salle";
 
 export class Event {
-    id!:number;
     titre!: string;
     description!: string;
     prixPlace!: number;

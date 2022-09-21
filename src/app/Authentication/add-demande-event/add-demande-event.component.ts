@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { Event } from '../models/event';
 import { FileHandle } from '../models/file-handle';
 import { Salle } from '../models/salle';
 import { EventsService } from '../service/events.service';
+import { UserAuthService } from '../service/user-auth.service';
 
 @Component({
   selector: 'app-add-demande-event',
@@ -21,9 +22,10 @@ export class AddDemandeEventComponent implements OnInit {
   categorie: Categorie[] = [];
   salle: Salle[] = [];
 
-  constructor(private eventService: EventsService, private sanitizer: DomSanitizer) { }
+  constructor(private eventService: EventsService) { }
 
   ngOnInit(): void {
+
   }
 
   getCategorie() {
@@ -50,58 +52,20 @@ export class AddDemandeEventComponent implements OnInit {
     )
   }
 
-
   demandeEvent(demandeEventForm: NgForm) {
-
-    const dEventFormData = this.prepareFormData(this.dEvent);
-
-    this.eventService.createDemande(dEventFormData, this.id).subscribe(
-      (response: Event) => {
-        console.log(response);
-        demandeEventForm.reset();
+    this.eventService.createDemande(this.dEvent, this.id).subscribe(
+      (resp : Event)=>{
+        console.log(resp);
       },
-      (error: HttpErrorResponse) => {
+
+      (error:HttpErrorResponse)=>{
         console.log(error);
       }
     );
-  }
-
-  prepareFormData(dEvent: Event): FormData{
-    const formData = new FormData();
-    formData.append(
-      'demandeEvent',
-      new Blob([JSON.stringify(dEvent)], {type: 'application/json'})
-    );
-
-      for ( var i=0; i < dEvent.image.length; i++){
-        formData.append(
-          'imageFile',
-          dEvent.image[i].file,
-          dEvent.image[i].file.name
-        );
-      }
-      return formData;
-
-  }
-
-  onFileSelected(event: any) {
-    if (event.target.files) {
-      const file = event.target.files[0];
-
-      const fileHandle: FileHandle = {
-        file: file,
-        url: this.sanitizer.bypassSecurityTrustUrl(
-          window.URL.createObjectURL(file)
-        )
-      }
-
-      this.dEvent.image.push(fileHandle);
-    }
+    
   }
 
 
-  removeImages(i: number){
-    this.dEvent.image.splice(i, 1);
-  }
+
 
 }
