@@ -22,13 +22,14 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         this.userAuthService.setToken(response.jwtToken);
         this.userAuthService.setRoles(response.iuser.role);
+        this.userAuthService.setIdUser(response.iuser.id);
         console.log(response);
         const role = response.iuser.role.roleName;
         console.log(role);
         if(role === 'User'){
           this.router.navigate(['/addEvent'])
         } else {
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/AllPendingRequest'])
         }
         console.log(response);
       },
@@ -37,4 +38,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
 }

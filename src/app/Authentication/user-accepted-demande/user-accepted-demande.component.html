@@ -1,0 +1,62 @@
+<body>
+    <div style="margin-top: 80px;">
+        <mat-card-title class="title"><b>Les Demandes acceptées</b></mat-card-title>
+        <table mat-table [dataSource]="dEvent" class="mat-elevation-z8 font"
+        style="background-color: rgb(230, 230, 238);">
+        
+        <ng-container matColumnDef="titre">
+            <th mat-header-cell *matHeaderCellDef><b>Titre de <br>l'événement</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.titre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="salle">
+            <th mat-header-cell *matHeaderCellDef><b>Ville - Centre <br> - Salle  </b></th>
+            <td mat-cell *matCellDef="let element"> {{element.salle.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prixPlace">
+            <th mat-header-cell *matHeaderCellDef><b>Prix de <br>place</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.prixPlace + " DH"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="heureDebut et dateOrganisation">
+            <th mat-header-cell *matHeaderCellDef><b>Heure et date <br> de l'événement</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.heureDebut}} <br> {{element.dateOrganisation}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="categorie">
+            <th mat-header-cell *matHeaderCellDef><b>Categorie de sujet<br> de l'événement</b></th>
+            <td mat-cell *matCellDef="let element"> {{element.categorie.name}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef><b>description<br> détaillée</b></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button style="color: rgb(0, 0, 0);" (click)="showDescription(element)">
+                    <mat-icon>description</mat-icon>
+                  </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Image">
+            <th mat-header-cell *matHeaderCellDef><b>L'affiche de <br> l'événement</b></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button style="color: rgb(0, 0, 0);" (click)="showImage(element)">
+                    <mat-icon>image</mat-icon>
+                  </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef><b>Etat de <br>votre demande</b></th>
+            <td mat-cell *matCellDef="let element">
+                    <a style="color: green"><b>{{element.status}}</b></a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+</body>

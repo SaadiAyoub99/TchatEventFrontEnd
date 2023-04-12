@@ -18,6 +18,22 @@ export class UserAuthService {
     return JSON.parse(localStorage.getItem("userName")  || '{}');
   }
 
+  public setIdUser(id:number){
+    localStorage.setItem("id", JSON.stringify(id));
+  }
+
+  public getIdUser(): number{
+    return JSON.parse(localStorage.getItem("id") || '{}');
+  }
+
+  public setEvent(id:number){
+    localStorage.setItem("id", JSON.stringify(id));
+  }
+
+  public getEvent(): number{
+    return JSON.parse(localStorage.getItem("id") || '{}')
+  }
+
   public setRoles(roles:string){
     localStorage.setItem('roles', JSON.stringify(roles));
   }

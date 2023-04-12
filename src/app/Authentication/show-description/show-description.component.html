@@ -1,0 +1,26 @@
+<div>
+      <h1 mat-dialog-title class="title"><b>Espace de réservation</b></h1>
+      <div mat-dialog-content>
+
+            <body>
+                  <form>
+                        <p  style="color: #000000; margin-left: 37%; margin-top: 30px ;font-size: 1.2em; ">
+                              <b>Choix de votre place </b>
+                        </p>
+                        <br>
+                        <button *ngFor="let p of dataToShow.descriptions"
+                              [ngClass]="p.reserved == true ? 'btn btn-secondary place' : 'btn btn-success place'" 
+                              [disabled]="p.reserved"
+                                
+                              (click)="onReserved(p.id)"
+                        >
+                              N° {{p.numero}}
+                        </button>
+                        <div style="margin-top: 30px" align="end">
+                              <button mat-raised-button mat-dialog-close color="primary" (click)="openSnackBar()" >Fermer l'opération</button>
+                        </div>
+
+                  </form>
+            </body>
+      </div>
+</div>
